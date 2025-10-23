@@ -5,13 +5,13 @@ const productos = [
     imagen: "./img/pastel2.jpg",
     nombre: "Pastel",
     descripcion: "Bizcocho",
-    precio: "$14.990",
+    precio: 14.990,
   },
   {
     imagen: "./img/pastel5.jpg",
     nombre: "Pastel de frutos rojos",
     descripcion: "Exquisito pastel con frutos del bosque y crema batida.",
-    precio: "$12.500",
+    precio: 12.500,
   },
 ];
 
