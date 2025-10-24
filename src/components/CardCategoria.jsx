@@ -1,14 +1,14 @@
-function CardCategoria({ imagen, titulo }) {
+import React from "react";
+
+export default function CardCategoria({ imagen, titulo }) {
   return (
-    <div className="col-md-4">
-      <div className="card text-white bg-primary h-100">
-        <img src={imagen} className="card-img-top mx-auto d-block" alt={titulo} style={{ maxHeight: "150px", objectFit: "cover" }}/>
-        <div className="card-body">
-          <h4 className="card-title">{titulo}</h4>
-        </div>
+    <div className="card h-100"> {/* <- sin bg-primary ni text-white */}
+      <div className="ratio ratio-4x3">
+        <img src={imagen} alt={titulo} className="w-100 h-100 object-fit-cover" />
+      </div>
+      <div className="card-body">
+        <h5 className="card-title mb-0">{titulo}</h5>
       </div>
     </div>
   );
 }
-
-export default CardCategoria;

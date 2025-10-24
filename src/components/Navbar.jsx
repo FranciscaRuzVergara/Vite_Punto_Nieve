@@ -1,26 +1,35 @@
 import { Link } from "react-router-dom";
-function Navbar(){
-    return(
-        <>
-        <header className="bg-primary p-3">
-            <div className="container d-flex flex-wrap aling-items-center">
-                <h1>Punto Nieve</h1>
-                <form className="d-flex ms-auto" role="search" style={{maxWidth:"400px"}}>
-                    <input className="form-control me-2" type="search" placeholder="buscar" style={{borderRadius:"10px"}}/>
-                    <button className="btn btn-outline-light" type="submit">Buscar</button>
-                </form>
-                <div className="d-flex align-items-center">
-                    <Link className="nav-link text-white px-2" to="/carrito">
-                        <i className="bi bi-cart fs-3"></i>
-                    </Link>
-                    <Link className="nav-link text-white px-2" to="/login">
-                        <i className="bi bi-person-fill fs-3"></i>
-                    </Link>
-                </div>
-            </div>
-        </header>
-        <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div className="container-fluid">
+
+function Navbar() {
+  return (
+    <>
+      {/*barra superior*/}
+      <header className="bg-dark py-3">
+        <div className="container d-flex flex-wrap align-items-center justify-content-between">
+          <h1 className="text-white m-0" style={{ fontFamily: "'Dela Gothic One', sans-serif" }}>
+            Punto Nieve
+          </h1>
+          {/*buscador*/}
+          <form className="d-flex ms-auto" role="search" style={{ maxWidth: "400px", width: "100%" }}>
+            <input className="form-control me-2 rounded-3" type="search" placeholder="Búsqueda" aria-label="Buscar" />
+            <button className="btn btn-outline-light" type="submit">Buscar</button>
+          </form>
+
+          {/*íconossss*/}
+          <div className="d-flex align-items-center ms-3">
+            <Link className="nav-link text-white px-2" to="/carrito" aria-label="Carrito">
+              <i className="bi bi-cart fs-3"></i>
+            </Link>
+            <Link className="nav-link text-white px-2" to="/login" aria-label="Login">
+              <i className="bi bi-person-fill fs-3"></i>
+            </Link>
+          </div>
+        </div>
+      </header>
+
+      {/*navbar principal*/}
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark border-top border-secondary">
+        <div className="container">
           <button
             className="navbar-toggler"
             type="button"
@@ -34,7 +43,7 @@ function Navbar(){
           </button>
 
           <div className="collapse navbar-collapse" id="navbarColor01">
-            <ul className="navbar-nav mb-2 mb-lg-0 mx-auto">
+            <ul className="navbar-nav mx-auto mb-2 mb-lg-0">
               <li className="nav-item">
                 <Link className="nav-link" to="/">Inicio</Link>
               </li>
@@ -58,7 +67,7 @@ function Navbar(){
         </div>
       </nav>
     </>
-    );
+  );
 }
 
 export default Navbar;
