@@ -1,17 +1,63 @@
 import React, { useState } from "react";
+import { SHA1 } from "../utils/sha1";
+import { validarCorreo, validarContrasena } from "../utils/validacionLogin";
 
 function Login() {
   const [correo, setCorreo] = useState("");
   const [contrasena, setContrasena] = useState("");
+  const [errors, setErrors] = useState({ correo: "", contrasena: "" });
+  const [successMsg, setSuccessMsg] = useState("");
+  
+  const handleInputChange = (e) => {
+    const { id, value } = e.target;
+    let error = "";
+
+    if (id === "correo") {
+      setCorreo(value);
+      error = validarCorreo(value);
+    } else if (id === "contrasena") {
+      setContrasena(value);
+      error = validarContrasena(value);
+    }
+
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [id]: error,
+    }));
+
+    setSuccessMsg("");
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Correo:", correo);
-    console.log("Contraseña:", contrasena);
+    setSuccessMsg("");
+
+    const newErrors = {
+      correo: validarCorreo(correo),
+      contrasena: validarContrasena(contrasena),
+    };
+
+    setErrors(newErrors);
+
+    const isFormValid = Object.values(newErrors).every((error) => error === "");
+
+    if (isFormValid) {
+      const contrasenaEncriptada = SHA1(contrasena);
+
+      setSuccessMsg("✅ Inicio de sesión exitoso");
+      console.log("Correo:", correo);
+      console.log("Contraseña Encriptada (SHA-1):", contrasenaEncriptada); 
+
+      setCorreo("");
+      setContrasena("");
+      
+    } else {
+      console.log("Formulario contiene errores de validación.");
+    }
   };
 
   return (
-    <div className="card bg-primary text-white mx-auto mt-2 mb-5" style={{ borderRadius: "15px", width: "450px" }}>
+    <div className="card bg-dark text-white mx-auto mt-2 mb-5" style={{ borderRadius: "15px", width: "450px" }}>
       <div className="card-body p-4">
         <form className="form-signin" onSubmit={handleSubmit}>
           <div className="d-flex justify-content-center">
@@ -22,22 +68,44 @@ function Login() {
             <input
               type="email"
               id="correo"
-              className="form-control"
+              className={`form-control ${
+                  (errors.correo && "is-invalid") ||
+                  (correo && !errors.correo && "is-valid") ||
+                  ""
+              }`}
               style={{ borderRadius: "10px" }}
               value={correo}
-              onChange={(e) => setCorreo(e.target.value)}
+              onChange={handleInputChange}
+              aria-describedby="correoError"
+              required
             />
+            {errors.correo && (
+              <div id="correoError" className="text-warning mt-1">
+                {errors.correo}
+              </div>
+            )}
           </div>
           <div className="form-group mb-4" style={{ paddingTop: "20px" }}>
             <label htmlFor="contrasena">Contraseña:</label>
             <input
               type="password"
               id="contrasena"
-              className="form-control"
+              className={`form-control ${
+                  (errors.contrasena && "is-invalid") ||
+                  (contrasena && !errors.contrasena && "is-valid") ||
+                  ""
+              }`}
               style={{ borderRadius: "10px" }}
               value={contrasena}
-              onChange={(e) => setContrasena(e.target.value)}
+              onChange={handleInputChange}
+              aria-describedby="contrasenaError"
+              required
             />
+            {errors.contrasena && (
+              <div id="contrasenaError" className="text-warning mt-1">
+                {errors.contrasena}
+              </div>
+            )}
           </div>
           <div className="form-group form-check mb-5" style={{ marginTop: "20px" }}>
             <input type="checkbox" className="form-check-input" id="check" />
@@ -50,6 +118,9 @@ function Login() {
               Iniciar sesión
             </button>
           </div>
+          {successMsg && (
+            <div className="text-center text-light fw-bold">{successMsg}</div>
+          )}
         </form>
       </div>
     </div>
