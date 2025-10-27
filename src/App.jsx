@@ -8,6 +8,7 @@ import MapaSitio from "./pages/MapaSitio";
 import Nosotros from "./pages/Nosotros";
 import Ayuda from "./pages/Ayuda";
 import Carrito from "./pages/Carrito";
+import Registro from "./pages/Registro";
 
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
           <Route path="nosotros" element={<Nosotros />} />
           <Route path="ayuda" element={<Ayuda />} />
           <Route path="login" element={<Login />} />
+          <Route path="registro" element={<Registro />} />
           <Route path="mapaSitio" element={<MapaSitio />} />
         </Route>
       </Routes>
