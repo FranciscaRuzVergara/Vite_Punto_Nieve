@@ -171,7 +171,7 @@ function Carrito({
                 <button
                   className="btn btn-primary btn-lg"
                   disabled={!!carritoError} // si hay error, no se puede pagar
-                  style = {{backgroundColor: "#88dbafff", borderColor: "#000000ff"}}
+                  style = {{backgroundColor: "#46894aff", borderColor: "#46894aff"}}
                 >
                   Proceder a Pagar 
                 </button  >

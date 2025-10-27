@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 
 function CardProducto({
   producto,
-  cantidadEnCarrito = 0, 
-  onAgregar,             
-  onIncrementar,   
-  onDecrementar      
+  cantidadEnCarrito = 0,
+  onAgregar,
+  onIncrementar,
+  onDecrementar
 }) {
   const { id, imagen, nombre, descripcion, precio } = producto;
 
@@ -15,14 +15,14 @@ function CardProducto({
     if (onAgregar) {
       onAgregar(producto);
     }
-    setShowMsg(true); 
+    setShowMsg(true);
   };
 
   // ocultar msje dsps de 2.5s
   useEffect(() => {
     if (showMsg) {
-      const t = setTimeout(() => setShowMsg(false), 2500); 
-      return () => clearTimeout(t); 
+      const t = setTimeout(() => setShowMsg(false), 2500);
+      return () => clearTimeout(t);
     }
   }, [showMsg]);
 
@@ -63,9 +63,13 @@ function CardProducto({
         <div className="card-body d-flex flex-column">
           <h5 className="card-title text-uppercase">{nombre}</h5>
           <p className="card-text text-muted">{descripcion}</p>
-          <h4 className="text-primary mt-auto mb-3">
+          <h4
+            className="mt-auto mb-3"
+            style={{ color: "#40963dff", fontWeight: "600" }}
+          >
             {precioFormateado}
           </h4>
+
 
           {cantidadEnCarrito === 0 ? (
             <button
