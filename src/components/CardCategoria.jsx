@@ -1,14 +1,32 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-export default function CardCategoria({ imagen, titulo }) {
+function CardCategoria({ imagen, titulo }) {
   return (
-    <div className="card h-100"> {/* <- sin bg-primary ni text-white */}
-      <div className="ratio ratio-4x3">
-        <img src={imagen} alt={titulo} className="w-100 h-100 object-fit-cover" />
+    <Link
+      to="/productos"
+      className="text-decoration-none text-dark"
+      style={{ cursor: "pointer" }}
+    >
+      <div className="card h-100">
+        <div className="ratio ratio-4x3">
+          <img
+            src={imagen}
+            alt={titulo}
+            className="w-100 h-100 object-fit-cover"
+          />
+        </div>
+        <div className="card-body">
+          <h5
+            className="card-title mb-0 text-uppercase"
+            style={{ letterSpacing: "0.08em" }}
+          >
+            {titulo}
+          </h5>
+        </div>
       </div>
-      <div className="card-body">
-        <h5 className="card-title mb-0">{titulo}</h5>
-      </div>
-    </div>
+    </Link>
   );
 }
+
+export default CardCategoria;
