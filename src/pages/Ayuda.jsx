@@ -62,7 +62,6 @@ function Ayuda() {
         }
         .centro-ayuda h2, .centro-ayuda p {
           color: white !important;
-          text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
         }
       `}</style>
 

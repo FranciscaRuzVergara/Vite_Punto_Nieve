@@ -170,7 +170,7 @@ function Carrito({
               <div className="d-grid gap-2 mt-3">
                 <button
                   className="btn btn-primary btn-lg"
-                  disabled={!!carritoError} // si hay error, no se puede pagar
+                  disabled={!!carritoError}
                   style = {{backgroundColor: "#46894aff", borderColor: "#46894aff"}}
                 >
                   Proceder a Pagar 

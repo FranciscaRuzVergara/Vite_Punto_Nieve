@@ -50,6 +50,7 @@ function Registro() {
 
       //estandar run para guardado
       const runLimpio = cleanRut(formData.run);
+      
       //encriptacion
       const contrasenaEncriptada = SHA1(formData.contrasena);
 

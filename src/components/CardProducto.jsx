@@ -9,7 +9,7 @@ function CardProducto({
 }) {
   const { id, imagen, nombre, descripcion, precio } = producto;
 
-  const [showMsg, setShowMsg] = useState(false); // controla mensaje agregado
+  const [showMsg, setShowMsg] = useState(false); // mensaje agregado
 
   const handleAgregar = () => {
     if (onAgregar) {
@@ -70,7 +70,6 @@ function CardProducto({
             {precioFormateado}
           </h4>
 
-
           {cantidadEnCarrito === 0 ? (
             <button
               className="btn btn-success d-block w-100"
@@ -85,7 +84,7 @@ function CardProducto({
               className="d-flex align-items-center justify-content-between w-100"
               style={{
                 backgroundColor: "#23272eff",
-                color: "#fff",
+                color: "#ffffffff",
                 borderRadius: "12px",
                 padding: "0.5rem 0.75rem",
                 fontWeight: "500",
@@ -103,7 +102,7 @@ function CardProducto({
                 −
               </button>
 
-              {/* Cantidad actual */}
+              {/* cantidad actual */}
               <span style={{ fontSize: "1rem", minWidth: "2rem", textAlign: "center" }}>
                 {cantidadEnCarrito}
               </span>

@@ -24,11 +24,11 @@ export default function FormCotizacion() {
     }
   }; 
 
-  const hasErrors = Object.keys(errors).length > 0; // hay errores?
-  const requiredEmpty = !formData.nombre || !formData.correo || !formData.mensaje || !formData.fecha; // campos vacíos?
+  const hasErrors = Object.keys(errors).length > 0;
+  const requiredEmpty = !formData.nombre || !formData.correo || !formData.mensaje || !formData.fecha;
 
   return (
-    <div className="card bg-dark text-white border-0"> {/* negro + texto blanco */}
+    <div className="card bg-dark text-white border-0">
       <div className="card-body">
         <h2 className="text-center mb-4">Formulario de Cotización</h2>
 

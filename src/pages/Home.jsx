@@ -27,10 +27,10 @@ export default function Home() {
         <div className="position-relative mb-5">
           <Carrusel slides={slides} titulo="" id="myCarousel" />
           <div className="position-absolute top-50 start-50 translate-middle text-center text-white p-3 bg-dark bg-opacity-50 rounded">
-            <h2 className="h3">Bienvenid@ a Punto Nieve</h2>
+            <h2 className="h3">¡Bienvenid@ a Punto Nieve!</h2>
             <p className="mb-0">
               Aquí encontrarás la mejor repostería artesanal, con productos
-              frescos para cada ocasión especial!
+              frescos para cada ocasión especial.
             </p>
           </div>
         </div>
