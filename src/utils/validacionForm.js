@@ -9,9 +9,15 @@ export const validateCotizacionForm = (formData) => {
 
   // correo
   const correo = formData.correo?.trim() || "";
-  if (!correo) errors.correo = "El correo es obligatorio.";
-  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo))
+  const formatoCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const dominiosPermitidos = /^(?:[a-zA-Z0-9._%+-]+@(duocuc\.cl|gmail\.com|profesorduoc\.cl))$/;
+  if (!correo) {
+    errors.correo = "El correo es obligatorio.";
+  } else if (!formatoCorreo.test(correo)) {
     errors.correo = "Por favor, ingrese un correo electrónico válido.";
+  } else if (!dominiosPermitidos.test(correo)) {
+    errors.correo = "Ingrese un correo válido con los dominios: @duocuc.cl, @gmail.com o @profesorduoc.cl";
+  }
 
   // mensaje
   const mensaje = formData.mensaje?.trim() || "";
@@ -19,19 +25,15 @@ export const validateCotizacionForm = (formData) => {
   else if (mensaje.length < 10)
     errors.mensaje = "El mensaje debe tener al menos 10 caracteres.";
 
-  // fecha: debe ser >= hoy+7
+  // fecha
   const fecha = formData.fecha || "";
   if (!fecha) {
     errors.fecha = "Por favor, seleccione una fecha para el evento.";
   } else {
     const [yy, mm, dd] = fecha.split("-").map(Number);
     const sel = new Date(yy, mm - 1, dd); sel.setHours(0,0,0,0);
-
     const min = new Date(); min.setHours(0,0,0,0); min.setDate(min.getDate() + 7);
-
-    if (sel < min) {
-      errors.fecha = "La fecha debe ser al menos dentro de una semana.";
-    }
+    if (sel < min) errors.fecha = "La fecha debe ser al menos dentro de una semana.";
   }
 
   return errors;

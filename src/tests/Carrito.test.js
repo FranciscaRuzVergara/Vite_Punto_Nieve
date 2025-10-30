@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 import { validateCarrito } from '../utils/validacionCarrito'
 
 describe('validateCarrito - límite $500.000 (total con IVA 19%)', () => {
-  it('marca error cuando el TOTAL supera $500.000', () => {
+  it('error cuando el TOTAL supera $500.000', () => {
     // subtotal 424.800 -> IVA 80.712 -> total 505.512 (>500mil)                  
     const carrito = [
       { precio: 14990, cantidad: 20 },   // 299.800                             
@@ -12,7 +12,7 @@ describe('validateCarrito - límite $500.000 (total con IVA 19%)', () => {
     expect(res.total).toBeDefined()                                             
   })
 
-  it('no marca error cuando el TOTAL está bajo el límite', () => {
+  it('no hay error si el total está bajo el límite', () => {
     // subtotal 420.000 -> total 499.800 (válido)                               
     const carrito = [
       { precio: 20000, cantidad: 10 }, // 200.000                             
