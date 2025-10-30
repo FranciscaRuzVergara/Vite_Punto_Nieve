@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { validateCarrito } from "./utils/validacionCarrito"; 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -16,18 +16,14 @@ function App() {
   const [carrito, setCarrito] = useState([]); 
   const [carritoError, setCarritoError] = useState("");
 
-  const intentarActualizarCarrito = (nuevoCarrito) => {
-    const errors = validateCarrito(nuevoCarrito); 
-
-    if (errors.total) {
+  useEffect(()=>{
+    const errors = validateCarrito(carrito);
+    if(errors.total){
       setCarritoError(errors.total);
-      return false; // importante: avisamos que falló
-    } else {
-      setCarrito(nuevoCarrito);
+    }else{
       setCarritoError("");
-      return true;
     }
-  };
+  },[carrito]);
 
   const agregarAlCarrito = (producto) => {
     setCarrito((carritoActual) => {
@@ -46,9 +42,7 @@ function App() {
           { ...producto, cantidad: 1 }
         ];
       }
-
-      const ok = intentarActualizarCarrito(nuevoCarrito);
-      return ok ? nuevoCarrito : carritoActual;
+      return nuevoCarrito;
     });
   };
 
@@ -59,9 +53,7 @@ function App() {
           ? { ...item, cantidad: item.cantidad + 1 } 
           : item
       );
-
-      const ok = intentarActualizarCarrito(nuevoCarrito);
-      return ok ? nuevoCarrito : carritoActual;
+      return nuevoCarrito;
     });
   };
 
@@ -74,18 +66,14 @@ function App() {
             : item
         )
         .filter((item) => item.cantidad > 0); 
-
-      const ok = intentarActualizarCarrito(nuevoCarrito);
-      return ok ? nuevoCarrito : carritoActual;
+      return nuevoCarrito ;
     });
   };
 
   const eliminarDelCarrito = (productoId) => {
     setCarrito((carritoActual) => {
       const nuevoCarrito = carritoActual.filter((item) => item.id !== productoId);
-
-      const ok = intentarActualizarCarrito(nuevoCarrito);
-      return ok ? nuevoCarrito : carritoActual;
+      return nuevoCarrito;
     });
   };
 
