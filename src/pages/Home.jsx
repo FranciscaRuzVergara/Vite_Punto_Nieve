@@ -1,6 +1,7 @@
 import React from "react";
 import Carrusel from "../components/Carrusel";
 import CardCategoria from "../components/CardCategoria";
+import FormCotizacion from "../components/FormCotizacion";
 
 export default function Home() {
   const slides = [
@@ -102,51 +103,7 @@ export default function Home() {
         <div className="container my-5">
           <div className="row align-items-center g-4">
             <div className="col-md-6">
-              <div className="card bg-dark text-white border-0">
-                {/* negro + texto blanco */}
-                <div className="card-body">
-                  <h2 className="text-center mb-4">Formulario de Cotización</h2>
-                  <form id="formCotizacion">
-                    <div className="mb-3">
-                      <label htmlFor="nombre" className="form-label">
-                        Nombre
-                      </label>
-                      <input type="text" id="nombre" className="form-control" />
-                    </div>
-                    <div className="mb-3">
-                      <label htmlFor="correo" className="form-label">
-                        Correo electrónico
-                      </label>
-                      <input
-                        type="email"
-                        id="correo"
-                        className="form-control"
-                      />
-                    </div>
-                    <div className="mb-3">
-                      <label htmlFor="mensaje" className="form-label">
-                        Mensaje
-                      </label>
-                      <textarea
-                        id="mensaje"
-                        rows={3}
-                        className="form-control"
-                      ></textarea>
-                    </div>
-                    <div className="mb-4">
-                      <label htmlFor="fecha" className="form-label">
-                        Fecha del evento
-                      </label>
-                      <input type="date" id="fecha" className="form-control" />
-                    </div>
-                    <div className="d-grid">
-                      <button type="submit" className="btn btn-success">
-                        Enviar
-                      </button>
-                    </div>
-                  </form>
-                </div>
-              </div>
+              <FormCotizacion />
             </div>
 
             <div className="col-md-6 text-center">
