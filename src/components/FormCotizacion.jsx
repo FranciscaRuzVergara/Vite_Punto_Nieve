@@ -42,7 +42,7 @@ export default function FormCotizacion() {
               value={formData.nombre} onChange={handleChange}
               className={`form-control ${errors.nombre ? "is-invalid" : ""}`}
             />
-            {errors.nombre && <div className="invalid-feedback">{errors.nombre}</div>}
+            {errors.nombre && <div className="text-warning">{errors.nombre}</div>}
           </div>
 
           <div className="mb-3">
@@ -52,7 +52,7 @@ export default function FormCotizacion() {
               value={formData.correo} onChange={handleChange}
               className={`form-control ${errors.correo ? "is-invalid" : ""}`}
             />
-            {errors.correo && <div className="invalid-feedback">{errors.correo}</div>}
+            {errors.correo && <div className="text-warning">{errors.correo}</div>}
           </div>
 
           <div className="mb-3">
@@ -62,7 +62,7 @@ export default function FormCotizacion() {
               value={formData.mensaje} onChange={handleChange}
               className={`form-control ${errors.mensaje ? "is-invalid" : ""}`}
             />
-            {errors.mensaje && <div className="invalid-feedback">{errors.mensaje}</div>}
+            {errors.mensaje && <div className="text-warning">{errors.mensaje}</div>}
           </div>
 
           <div className="mb-4">
@@ -73,7 +73,7 @@ export default function FormCotizacion() {
               className={`form-control ${errors.fecha ? "is-invalid" : ""}`}
               placeholder="dd-mm-aaaa"
             />
-            {errors.fecha && <div className="invalid-feedback">{errors.fecha}</div>}
+            {errors.fecha && <div className="text-warning">{errors.fecha}</div>}
           </div>
 
           <div className="d-grid">
