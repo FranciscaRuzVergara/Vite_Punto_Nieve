@@ -2,6 +2,7 @@ import React from "react";
 import Carrusel from "../components/Carrusel";
 import CardCategoria from "../components/CardCategoria";
 import FormCotizacion from "../components/FormCotizacion";
+import "../styles/Home.css";
 
 export default function Home() {
   const slides = [
@@ -37,8 +38,7 @@ export default function Home() {
 
         {/*categorías de productos*/}
         <h2
-          className="h4 text-uppercase ps-1 mb-3"
-          style={{ letterSpacing: "0.08em" }}
+          className="h4 text-uppercase ps-1 mb-3 home-section-title"
         >
           Nuestros Productos
         </h2>

@@ -1,15 +1,15 @@
-import React from 'react';
+import React from "react";
+import "../styles/Carrito.css";
 
 function Carrito({
   carrito,
-  carritoError,             
+  carritoError,
   eliminarDelCarrito,
   incrementarCantidad,
   decrementarCantidad
 }) {
-
   const subtotal = carrito.reduce(
-    (acc, item) => acc + (item.precio * (item.cantidad || 1)),
+    (acc, item) => acc + item.precio * (item.cantidad || 1),
     0
   );
   const iva = subtotal * 0.19;
@@ -57,64 +57,33 @@ function Carrito({
                       <img
                         src={item.imagen}
                         alt={item.nombre}
-                        style={{
-                          width: '50px',
-                          height: '50px',
-                          objectFit: 'cover',
-                          marginRight: '10px',
-                          borderRadius: '4px'
-                        }}
+                        className="cart-item-image"
                       />
                       <span>{item.nombre}</span>
                     </div>
                   </td>
 
                   <td className="text-center">
-                    ${item.precio.toLocaleString('es-CL')}
+                    ${item.precio.toLocaleString("es-CL")}
                   </td>
 
                   <td className="text-center">
-                    <div
-                      className="d-inline-flex align-items-center justify-content-between"
-                      style={{
-                        backgroundColor: '#151b25ff',
-                        color: '#fff',
-                        borderRadius: '12px',
-                        padding: '0.4rem 0.6rem',
-                        minWidth: '110px'
-                      }}
-                    >
+                    <div className="d-inline-flex align-items-center justify-content-between cart-qty-control">
                       {/* botón - */}
                       <button
-                        className="btn btn-link text-white text-decoration-none p-0 px-2"
-                        style={{
-                          fontSize: '1.25rem',
-                          lineHeight: '1rem',
-                          fontWeight: '600'
-                        }}
+                        className="btn btn-link text-white text-decoration-none p-0 px-2 cart-qty-btn"
                         onClick={() => decrementarCantidad(item.id)}
                         aria-label={`Disminuir cantidad de ${item.nombre}`}
                       >
                         −
                       </button>
 
-                      <span
-                        style={{
-                          fontSize: '1rem',
-                          minWidth: '2rem',
-                          textAlign: 'center'
-                        }}
-                      >
+                      <span className="cart-qty-value">
                         {item.cantidad}
                       </span>
 
                       <button
-                        className="btn btn-link text-white text-decoration-none p-0 px-2"
-                        style={{
-                          fontSize: '1.25rem',
-                          lineHeight: '1rem',
-                          fontWeight: '600'
-                        }}
+                        className="btn btn-link text-white text-decoration-none p-0 px-2 cart-qty-btn"
                         onClick={() => incrementarCantidad(item.id)}
                         aria-label={`Aumentar cantidad de ${item.nombre}`}
                       >
@@ -124,7 +93,7 @@ function Carrito({
                   </td>
 
                   <td className="text-end">
-                    ${(item.precio * item.cantidad).toLocaleString('es-CL')}
+                    {(item.precio * item.cantidad).toLocaleString("es-CL")}
                   </td>
 
                   <td className="text-end">
@@ -146,13 +115,13 @@ function Carrito({
               <ul className="list-group">
                 <li className="list-group-item d-flex justify-content-between">
                   Subtotal:
-                  <span>${subtotal.toLocaleString('es-CL')}</span>
+                  <span>${subtotal.toLocaleString("es-CL")}</span>
                 </li>
 
                 <li className="list-group-item d-flex justify-content-between">
                   IVA (19%):
                   <span>
-                    ${iva.toLocaleString('es-CL', { minimumFractionDigits: 0 })}
+                    ${iva.toLocaleString("es-CL", { minimumFractionDigits: 0 })}
                   </span>
                 </li>
 
@@ -160,7 +129,7 @@ function Carrito({
                   Total:
                   <span>
                     $
-                    {total.toLocaleString('es-CL', {
+                    {total.toLocaleString("es-CL", {
                       minimumFractionDigits: 0
                     })}
                   </span>
@@ -169,12 +138,11 @@ function Carrito({
 
               <div className="d-grid gap-2 mt-3">
                 <button
-                  className="btn btn-primary btn-lg"
+                  className="btn btn-primary btn-lg cart-pay-button"
                   disabled={!!carritoError}
-                  style = {{backgroundColor: "#46894aff", borderColor: "#46894aff"}}
                 >
-                  Proceder a Pagar 
-                </button  >
+                  Proceder a Pagar
+                </button>
               </div>
 
               {carritoError && (

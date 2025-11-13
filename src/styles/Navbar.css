@@ -1,0 +1,14 @@
+.navbar-logo {
+  font-family: "Dela Gothic One", sans-serif;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.navbar-search-form {
+  max-width: 400px;
+  width: 100%;
+}

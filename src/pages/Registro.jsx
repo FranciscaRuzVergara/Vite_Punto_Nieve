@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { validateRegisterForm } from "../utils/validacionRegistro";
 import { SHA1 } from "../utils/sha1";
 import { cleanRut } from "../utils/validaRut";
+import "../styles/Registro.css";
 
 function Registro() {
   const [formData, setFormData] = useState({
@@ -23,18 +24,18 @@ function Registro() {
     const { id, value, type, checked } = e.target;
     const newValue = type === "checkbox" ? checked : value;
     const updatedFormData = {
-       ...formData,
-       [id]: newValue,
-     };
+      ...formData,
+      [id]: newValue,
+    };
     setFormData(updatedFormData);
- 
-   const allErrors = validateRegisterForm(updatedFormData);
-    
-   setErrors((prevErrors) => ({
-       ...prevErrors,
-     [id]: allErrors[id] || "", 
-     }));
-    setSuccessMsg("")
+
+    const allErrors = validateRegisterForm(updatedFormData);
+
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [id]: allErrors[id] || "",
+    }));
+    setSuccessMsg("");
   };
 
   const handleSubmit = (e) => {
@@ -47,22 +48,21 @@ function Registro() {
     const isFormValid = Object.keys(newErrors).length === 0;
 
     if (isFormValid) {
+      // estandar run para guardado
+      const runLimpio = cleanRut(formData.run); 
 
-      //estandar run para guardado
-      const runLimpio = cleanRut(formData.run);
-      
-      //encriptacion
-      const contrasenaEncriptada = SHA1(formData.contrasena);
+      // encriptacion
+      const contrasenaEncriptada = SHA1(formData.contrasena); 
 
-      //creacion de objeto
+      // creacion de objeto
       const dataToSend = {
         ...formData,
         run: runLimpio,
         contrasena: contrasenaEncriptada,
-        repContrasena: contrasenaEncriptada
+        repContrasena: contrasenaEncriptada,
       };
       setSuccessMsg("✅ Registro exitoso. ¡Bienvenido!");
-      console.log("Datos para enviar al Backend (Contraseña Encriptada):", dataToSend);
+      console.log("Datos para enviar al Backend (Contraseña Encriptada):", dataToSend); 
 
       setFormData({
         run: "",
@@ -79,10 +79,7 @@ function Registro() {
 
   return (
     <div className="container d-flex justify-content-center align-items-center form-container">
-      <div
-        className="card bg-dark text-white p-4 my-4 card-custom"
-        style={{ borderRadius: "10px", maxWidth: "600px" }}
-      >
+      <div className="card bg-dark text-white p-4 my-4 registro-card">
         <h2 className="text-uppercase text-center mb-4">Registro</h2>
 
         <form id="formularioReg" onSubmit={handleSubmit}>
@@ -96,10 +93,9 @@ function Registro() {
                   (errors.run && "is-invalid") ||
                   (formData.run && !errors.run && "is-valid") ||
                   ""
-                }`}
+                } registro-input`}
                 value={formData.run}
                 onChange={handleChange}
-                style={{ borderRadius: "10px" }}
               />
               {errors.run && <div className="text-warning">{errors.run}</div>}
             </div>
@@ -112,10 +108,9 @@ function Registro() {
                   (errors.fechaNac && "is-invalid") ||
                   (formData.fechaNac && !errors.fechaNac && "is-valid") ||
                   ""
-                }`}
+                } registro-input`}
                 value={formData.fechaNac}
                 onChange={handleChange}
-                style={{ borderRadius: "10px" }}
               />
               {errors.fechaNac && (
                 <div className="text-warning">{errors.fechaNac}</div>
@@ -133,10 +128,9 @@ function Registro() {
                   (errors.nombre && "is-invalid") ||
                   (formData.nombre && !errors.nombre && "is-valid") ||
                   ""
-                }`}
+                } registro-input`}
                 value={formData.nombre}
                 onChange={handleChange}
-                style={{ borderRadius: "10px" }}
               />
               {errors.nombre && (
                 <div className="text-warning">{errors.nombre}</div>
@@ -151,10 +145,9 @@ function Registro() {
                   (errors.apellido && "is-invalid") ||
                   (formData.apellido && !errors.apellido && "is-valid") ||
                   ""
-                }`}
+                } registro-input`}
                 value={formData.apellido}
                 onChange={handleChange}
-                style={{ borderRadius: "10px" }}
               />
               {errors.apellido && (
                 <div className="text-warning">{errors.apellido}</div>
@@ -168,13 +161,12 @@ function Registro() {
               type="email"
               id="correo"
               className={`form-control ${
-                  (errors.correo && "is-invalid") ||
-                  (formData.correo && !errors.correo && "is-valid") ||
-                  ""
-                }`}
+                (errors.correo && "is-invalid") ||
+                (formData.correo && !errors.correo && "is-valid") ||
+                ""
+              } registro-input`}
               value={formData.correo}
               onChange={handleChange}
-              style={{ borderRadius: "10px" }}
             />
             {errors.correo && (
               <div className="text-warning">{errors.correo}</div>
@@ -191,10 +183,9 @@ function Registro() {
                   (errors.contrasena && "is-invalid") ||
                   (formData.contrasena && !errors.contrasena && "is-valid") ||
                   ""
-                }`}
+                } registro-input`}
                 value={formData.contrasena}
                 onChange={handleChange}
-                style={{ borderRadius: "10px" }}
               />
               {errors.contrasena && (
                 <div className="text-warning">{errors.contrasena}</div>
@@ -207,12 +198,11 @@ function Registro() {
                 id="repContrasena"
                 className={`form-control ${
                   (errors.repContrasena && "is-invalid") ||
-                  (formData.repContrasena && !errors.rep && "is-valid") ||
+                  (formData.repContrasena && !errors.repContrasena && "is-valid") ||
                   ""
-                }`}
+                } registro-input`}
                 value={formData.repContrasena}
                 onChange={handleChange}
-                style={{ borderRadius: "10px" }}
               />
               {errors.repContrasena && (
                 <div className="text-warning">{errors.repContrasena}</div>
@@ -235,15 +225,16 @@ function Registro() {
               </a>
             </label>
             {errors.aceptoTerminos && (
-              <div className="text-warning mt-1">{errors.aceptoTerminos}</div>
+              <div className="text-warning mt-1">
+                {errors.aceptoTerminos}
+              </div>
             )}
           </div>
 
           <div className="d-flex justify-content-center">
             <button
               type="submit"
-              className="btn btn-success px-4"
-              style={{ borderRadius: "10px", fontSize: "1rem" }}
+              className="btn btn-success px-4 registro-submit-btn"
             >
               Registrarme
             </button>
@@ -268,4 +259,3 @@ function Registro() {
 }
 
 export default Registro;
-

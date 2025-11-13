@@ -1,0 +1,16 @@
+.navbar .nav-link.active {
+  font-weight: bold;
+  border-bottom: 2px solid white;
+}
+
+.centro-ayuda {
+  background-image: url("/img/faq.avif");
+  background-size: cover;
+  background-position: center;
+  padding: 80px 0;
+}
+
+.centro-ayuda h2,
+.centro-ayuda p {
+  color: white !important;
+}

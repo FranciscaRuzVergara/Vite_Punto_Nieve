@@ -1,0 +1,12 @@
+.nosotros-hero {
+  background-image: url("/img/qnessomos.jpg");
+  background-size: cover;
+  background-position: center;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+.nosotros-section-image {
+  max-height: 400px;
+  width: 80%;
+  object-fit: cover;
+}

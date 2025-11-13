@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import "../styles/CardProducto.css";
 
 function CardProducto({
   producto,
@@ -36,14 +37,7 @@ function CardProducto({
 
         {showMsg && (
           <div
-            className="alert alert-success py-1 px-2 position-absolute"
-            style={{
-              top: "10px",
-              right: "10px",
-              fontSize: "0.8rem",
-              borderRadius: "6px",
-              marginBottom: 0,
-            }}
+            className="alert alert-success py-1 px-2 position-absolute product-alert"
           >
             <i className="bi bi-check-circle-fill me-1"></i>
             Agregado
@@ -52,28 +46,20 @@ function CardProducto({
 
         <img
           src={imagen}
-          className="card-img-top"
+          className="card-img-top product-image"
           alt={nombre}
-          style={{
-            objectFit: "cover",
-            maxHeight: "240px"
-          }}
         />
 
         <div className="card-body d-flex flex-column">
           <h5 className="card-title text-uppercase">{nombre}</h5>
           <p className="card-text text-muted">{descripcion}</p>
-          <h4
-            className="mt-auto mb-3"
-            style={{ color: "#40963dff", fontWeight: "600" }}
-          >
+          <h4 className="mt-auto mb-3 product-price">
             {precioFormateado}
           </h4>
 
           {cantidadEnCarrito === 0 ? (
             <button
-              className="btn btn-success d-block w-100"
-              style={{ borderRadius: "10px" }}
+              className="btn btn-success d-block w-100 product-add-btn"
               onClick={handleAgregar}
             >
               <i className="bi bi-cart-plus me-2"></i>
@@ -81,39 +67,22 @@ function CardProducto({
             </button>
           ) : (
             <div
-              className="d-flex align-items-center justify-content-between w-100"
-              style={{
-                backgroundColor: "#23272eff",
-                color: "#ffffffff",
-                borderRadius: "12px",
-                padding: "0.5rem 0.75rem",
-                fontWeight: "500",
-              }}
+              className="d-flex align-items-center justify-content-between w-100 product-qty-container"
             >
               <button
-                className="btn btn-link text-white text-decoration-none px-2"
-                style={{
-                  fontSize: "1.25rem",
-                  lineHeight: "1rem",
-                  fontWeight: "600",
-                }}
+                className="btn btn-link text-white text-decoration-none px-2 product-qty-btn"
                 onClick={() => onDecrementar && onDecrementar(id)}
               >
                 −
               </button>
 
               {/* cantidad actual */}
-              <span style={{ fontSize: "1rem", minWidth: "2rem", textAlign: "center" }}>
+              <span className="product-qty-value">
                 {cantidadEnCarrito}
               </span>
 
               <button
-                className="btn btn-link text-white text-decoration-none px-2"
-                style={{
-                  fontSize: "1.25rem",
-                  lineHeight: "1rem",
-                  fontWeight: "600",
-                }}
+                className="btn btn-link text-white text-decoration-none px-2 product-qty-btn"
                 onClick={() => onIncrementar && onIncrementar(id)}
               >
                 +

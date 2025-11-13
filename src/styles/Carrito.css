@@ -1,0 +1,32 @@
+.cart-item-image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  margin-right: 10px;
+  border-radius: 4px;
+}
+
+.cart-qty-control {
+  background-color: #151b25ff;
+  color: #fff;
+  border-radius: 12px;
+  padding: 0.4rem 0.6rem;
+  min-width: 110px;
+}
+
+.cart-qty-btn {
+  font-size: 1.25rem;
+  line-height: 1rem;
+  font-weight: 600;
+}
+
+.cart-qty-value {
+  font-size: 1rem;
+  min-width: 2rem;
+  text-align: center;
+}
+
+.cart-pay-button {
+  background-color: #46894aff;
+  border-color: #46894aff;
+}

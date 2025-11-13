@@ -1,13 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "../styles/MapaSitio.css";
 
 function MapaSitio() {
   return (
     <main className="container mt-4 mb-5">
       <div className="card shadow-sm p-4">
         <h1
-          className="card-title text-center text-dark mb-4"
-          style={{ fontFamily: "Dela Gothic One, sans-serif" }}
+          className="card-title text-center text-dark mb-4 mapa-sitio-title"
         >
           Mapa del Sitio
         </h1>

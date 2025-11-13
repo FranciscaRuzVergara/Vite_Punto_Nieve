@@ -1,3 +1,5 @@
+import "../styles/Ayuda.css";
+
 const hero = {
   titulo: "Centro de Ayuda",
   descripcion: "Aquí encontrarás respuestas a tus dudas y soporte de nuestros servicios.",
@@ -48,23 +50,6 @@ const faqs = [
 function Ayuda() {
   return (
     <>
-      {}
-      <style>{`
-        .navbar .nav-link.active {
-          font-weight: bold;
-          border-bottom: 2px solid white;
-        }
-        .centro-ayuda {
-          background-image: url('${hero.imagenFondo}');
-          background-size: cover;
-          background-position: center;
-          padding: 80px 0;
-        }
-        .centro-ayuda h2, .centro-ayuda p {
-          color: white !important;
-        }
-      `}</style>
-
       {/* hero */}
       <section className="centro-ayuda">
         <main className="container my-5 text-center">

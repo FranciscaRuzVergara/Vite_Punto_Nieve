@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "../styles/CardCategoria.css";
 
 function CardCategoria({ imagen, titulo }) {
   return (
     <Link
       to="/productos"
-      className="text-decoration-none text-dark"
-      style={{ cursor: "pointer" }}
+      className="text-decoration-none text-dark card-categoria-link"
     >
       <div className="card h-100">
         <div className="ratio ratio-4x3">
@@ -17,10 +17,7 @@ function CardCategoria({ imagen, titulo }) {
           />
         </div>
         <div className="card-body">
-          <h5
-            className="card-title mb-0 text-uppercase"
-            style={{ letterSpacing: "0.08em" }}
-          >
+          <h5 className="card-title mb-0 text-uppercase card-categoria-title">
             {titulo}
           </h5>
         </div>

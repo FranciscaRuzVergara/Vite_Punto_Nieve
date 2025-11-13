@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import "../styles/Navbar.css";
 
 function Navbar() {
   return (
@@ -8,25 +9,15 @@ function Navbar() {
         <div className="container d-flex flex-wrap align-items-center justify-content-between">
           <Link
             to="/"
-            className="text-white m-0 text-decoration-none"
-            style={{
-              fontFamily: "'Dela Gothic One', sans-serif",
-              fontSize: "2rem",
-              lineHeight: "1",
-              cursor: "pointer",
-              textTransform: "uppercase",
-              fontWeight: "700",
-              letterSpacing: "0.05em",
-            }}
+            className="text-white m-0 text-decoration-none navbar-logo"
           >
             PUNTO NIEVE
           </Link>
 
           {/* buscador */}
           <form
-            className="d-flex ms-auto"
+            className="d-flex ms-auto navbar-search-form"
             role="search"
-            style={{ maxWidth: "400px", width: "100%" }}
           >
             <input
               className="form-control me-2 rounded-3"

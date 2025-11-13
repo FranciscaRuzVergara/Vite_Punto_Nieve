@@ -1,3 +1,5 @@
+import "../styles/Nosotros.css";
+
 const secciones = [
   {
     titulo: "¿Quiénes somos?",
@@ -32,18 +34,8 @@ function Nosotros() {
         <section
           key={index}
           className={`py-5 text-center ${
-            sec.fondo ? "text-white" : ""
+            sec.fondo ? "nosotros-hero text-white" : ""
           }`}
-          style={
-            sec.fondo
-              ? {
-                  backgroundImage: `url(${sec.imagen})`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                  textShadow: "1px 1px 3px rgba(0,0,0,0.7)",
-                }
-              : {}
-          }
         >
           <div className="container">
             <h2 className="mb-4">{sec.titulo}</h2>
@@ -53,8 +45,7 @@ function Nosotros() {
               <img
                 src={sec.imagen}
                 alt={sec.titulo}
-                className="img-fluid mt-3"
-                style={{ maxHeight: "400px", width: "80%", objectFit: "cover" }}
+                className="img-fluid mt-3 nosotros-section-image"
               />
             )}
           </div>

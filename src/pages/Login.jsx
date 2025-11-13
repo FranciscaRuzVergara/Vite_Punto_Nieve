@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { SHA1 } from "../utils/sha1";
 import { validarCorreo, validarContrasena } from "../utils/validacionLogin";
+import "../styles/Login.css";
 
 function Login() {
   const [correo, setCorreo] = useState("");
   const [contrasena, setContrasena] = useState("");
   const [errors, setErrors] = useState({ correo: "", contrasena: "" });
   const [successMsg, setSuccessMsg] = useState("");
-  
+
   const handleInputChange = (e) => {
     const { id, value } = e.target;
     let error = "";
@@ -39,41 +40,42 @@ function Login() {
 
     setErrors(newErrors);
 
-    const isFormValid = Object.values(newErrors).every((error) => error === "");
+    const isFormValid = Object.values(newErrors).every(
+      (error) => error === ""
+    );
 
     if (isFormValid) {
       const contrasenaEncriptada = SHA1(contrasena);
 
-      setSuccessMsg("✅ Inicio de sesión exitoso");
+      setSuccessMsg("✅ Inicio de sesión exitoso!");
       console.log("Correo:", correo);
-      console.log("Contraseña Encriptada (SHA-1):", contrasenaEncriptada); 
+      console.log("Contraseña Encriptada (SHA-1):", contrasenaEncriptada);
 
       setCorreo("");
       setContrasena("");
-      
     } else {
       console.log("Formulario contiene errores de validación.");
     }
   };
 
   return (
-    <div className="card bg-dark text-white mx-auto mt-2 mb-5" style={{ borderRadius: "15px", width: "450px" }}>
+    <div className="card bg-dark text-white mx-auto mt-2 mb-5 login-card">
       <div className="card-body p-4">
         <form className="form-signin" onSubmit={handleSubmit}>
           <div className="d-flex justify-content-center">
-            <i className="bi bi-person-square mb-4" style={{ fontSize: "60px" }}></i>
+            <i className="bi bi-person-square mb-4 login-icon"></i>
           </div>
+
           <div className="form-group">
             <label htmlFor="correo">Correo electrónico:</label>
             <input
               type="email"
               id="correo"
               className={`form-control ${
-                  (errors.correo && "is-invalid") ||
-                  (correo && !errors.correo && "is-valid") ||
-                  ""
-              }`}
-              style={{ borderRadius: "10px" }}
+                (errors.correo && "is-invalid") ||
+                (correo && !errors.correo && "is-valid") ||
+                ""
+              } login-input`}
               value={correo}
               onChange={handleInputChange}
               aria-describedby="correoError"
@@ -85,17 +87,17 @@ function Login() {
               </div>
             )}
           </div>
-          <div className="form-group mb-4" style={{ paddingTop: "20px" }}>
+
+          <div className="form-group mb-4 login-form-group-spacing">
             <label htmlFor="contrasena">Contraseña:</label>
             <input
               type="password"
               id="contrasena"
               className={`form-control ${
-                  (errors.contrasena && "is-invalid") ||
-                  (contrasena && !errors.contrasena && "is-valid") ||
-                  ""
-              }`}
-              style={{ borderRadius: "10px" }}
+                (errors.contrasena && "is-invalid") ||
+                (contrasena && !errors.contrasena && "is-valid") ||
+                ""
+              } login-input`}
               value={contrasena}
               onChange={handleInputChange}
               aria-describedby="contrasenaError"
@@ -107,19 +109,27 @@ function Login() {
               </div>
             )}
           </div>
-          <div className="form-group form-check mb-5" style={{ marginTop: "20px" }}>
+
+          <div className="form-group form-check mb-5 login-checkbox-group">
             <input type="checkbox" className="form-check-input" id="check" />
             <label className="form-check-label" htmlFor="check">
               Recuérdame
             </label>
           </div>
+
           <div className="d-flex justify-content-center">
-            <button type="submit" className="btn btn-success btn-md" style={{ borderRadius: "10px" }}>
+            <button
+              type="submit"
+              className="btn btn-success btn-md login-submit-btn"
+            >
               Iniciar sesión
             </button>
           </div>
+
           {successMsg && (
-            <div className="text-center text-light fw-bold">{successMsg}</div>
+            <div className="text-center text-light fw-bold">
+              {successMsg}
+            </div>
           )}
         </form>
       </div>

@@ -1,0 +1,24 @@
+.login-card {
+  border-radius: 15px;
+  width: 450px;
+}
+
+.login-icon {
+  font-size: 60px;
+}
+
+.login-input {
+  border-radius: 10px;
+}
+
+.login-form-group-spacing {
+  padding-top: 20px;
+}
+
+.login-checkbox-group {
+  margin-top: 20px;
+}
+
+.login-submit-btn {
+  border-radius: 10px;
+}
