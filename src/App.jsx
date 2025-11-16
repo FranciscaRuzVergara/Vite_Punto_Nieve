@@ -4,13 +4,19 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
-import Productos from "./pages/Productos";
+import Productos from "./components/Productos";
 import Login from "./pages/Login";
 import MapaSitio from "./pages/MapaSitio";
 import Nosotros from "./pages/Nosotros";
 import Ayuda from "./pages/Ayuda";
-import Carrito from "./pages/Carrito";
+import Carrito from "./components/Carrito";
 import Registro from "./pages/Registro";
+import CarritoPage from "./pages/CarritoPage";
+import ProductosPage from "./pages/ProductosPage";
+import PedidosPage from "./pages/PedidosPage";
+import ClientesPage from "./pages/ClientesPage";
+import CategoriasPage from "./pages/CategoriasPage";
+import UsuariosPage from "./pages/UsuariosPage";
 
 function App() {
   const [carrito, setCarrito] = useState([]); 
@@ -105,7 +111,7 @@ function App() {
             element={
               <Carrito
                 carrito={carrito}
-                carritoError={carritoError}       
+                carritoError={carritoError} 
                 eliminarDelCarrito={eliminarDelCarrito}
                 incrementarCantidad={incrementarCantidad}
                 decrementarCantidad={decrementarCantidad}
@@ -118,6 +124,14 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="registro" element={<Registro />} />
           <Route path="mapaSitio" element={<MapaSitio />} />
+
+          {/* rutas backend */}
+          <Route path="admin/carrito" element={<CarritoPage />} />
+          <Route path="admin/productos" element={<ProductosPage />} />
+          <Route path="admin/pedidos" element={<PedidosPage />} />
+          <Route path="admin/clientes" element={<ClientesPage />} />
+          <Route path="admin/categorias" element={<CategoriasPage />} />
+          <Route path="admin/usuarios" element={<UsuariosPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
