@@ -31,9 +31,9 @@ export const validateRegisterForm = (formData) => {
   }
 
   //Correo
-  const dominiosPermitidos = /^(?:[a-zA-Z0-9._%+-]+@(duocuc\.cl|gmail\.com|profesorduoc\.cl))$/;
+  const dominiosPermitidos = /^[\w.-]+@([\w-]+\.)+[\w]{2,4}$/i;
   if (!dominiosPermitidos.test(formData.correo)) {
-    errors.correo = "Ingrese un correo válido con los dominios: @duocuc.cl, @gmail.com o @profesorduoc.cl";
+    errors.correo = "Ingrese un correo válido";
   }
 
   //Contraseña

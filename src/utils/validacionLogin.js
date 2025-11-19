@@ -1,10 +1,10 @@
 export const validarCorreo = (correo) => {
-  const dominiosPermitidos = /^(?:[a-zA-Z0-9._%+-]+@(duocuc\.cl|gmail\.com|profesorduoc\.cl))$/;
+  const dominiosPermitidos = /^[\w.-]+@([\w-]+\.)+[\w]{2,4}$/i;
   if (!correo) {
     return "El correo electrónico es obligatorio.";
   }
   if (!dominiosPermitidos.test(correo)) {
-    return "Ingrese un correo válido con los dominios: @duocuc.cl, @gmail.com o @profesorduoc.cl";
+    return "Ingrese un correo válido";
   }
   return "";
 };
