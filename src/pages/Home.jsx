@@ -1,10 +1,89 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Carrusel from "../components/Carrusel";
 import CardCategoria from "../components/CardCategoria";
 import FormCotizacion from "../components/FormCotizacion";
 import "../styles/Home.css";
 
 export default function Home() {
+  const [clima, setClima] = useState(null);
+  const [cargandoClima, setCargandoClima] = useState(true);
+  const [errorClima, setErrorClima] = useState(null);
+
+  const API_URL ="https://my.meteoblue.com/packages/basic-1h?apikey=ezOHlkSoXN86sZm3&lat=-33.4569&lon=-70.6483&asl=556&format=json";
+
+  useEffect(() => {
+  const fetchClima = async () => {
+    try {
+      setCargandoClima(true);
+      setErrorClima(null);
+
+      const res = await fetch(API_URL);
+      if (!res.ok) throw new Error("Error al obtener clima");
+
+      const data = await res.json();
+
+      const hour = data?.data_1h;
+
+      if (hour && hour.temperature?.length > 0) {
+        setClima({
+          temp: hour.temperature[0],
+          weatherCode: null,
+        });
+      } else {
+        throw new Error("Estructura de clima inválida");
+      }
+    } catch (e) {
+      console.log(e);
+      setErrorClima("No se pudo cargar el clima.");
+    } finally {
+      setCargandoClima(false);
+    }
+  };
+
+  fetchClima();
+}, []);
+  
+  const TarjetaClima = () => {
+    if (cargandoClima) {
+      return (
+        <div className="text-center p-3 bg-light rounded-4 shadow-sm mb-4">
+          Cargando clima...
+        </div>
+      );
+    }
+
+    if (errorClima) {
+      return (
+        <div className="alert alert-warning text-center rounded-4" role="alert">
+          {errorClima}
+        </div>
+      );
+    }
+
+    if (!clima) return null;
+    const cardBgClass = "bg-dark text-white";
+
+    return (
+    <div className={`card ${cardBgClass} mb-4 shadow-lg border-0 rounded-4`}>
+      <div className="card-body p-3 d-flex justify-content-between align-items-center">
+        <div>
+          <h5 className="card-title mb-0">
+            Clima en Santiago
+          </h5>
+          <p className="card-text mb-0">
+            Temperatura actual del día
+          </p>
+        </div>
+        <div className="text-end">
+          <h4 className="mb-0">
+            {clima.temp}°C
+          </h4>
+        </div>
+      </div>
+    </div>
+  );   
+};
+
   const slides = [
     { imagen: "/img/img1.jpg", alt: "carrusel1" },
     { imagen: "/img/img2.jpg", alt: "carrusel2" },
@@ -34,6 +113,10 @@ export default function Home() {
               frescos para cada ocasión especial.
             </p>
           </div>
+        </div>
+
+        <div className="col-12 col-lg-4 order-lg-2">
+          <TarjetaClima />  
         </div>
 
         {/*categorías de productos*/}
