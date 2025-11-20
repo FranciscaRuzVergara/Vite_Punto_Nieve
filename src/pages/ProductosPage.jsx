@@ -1,8 +1,16 @@
 import React, { useEffect, useState } from 'react'
+import CardProducto from '../components/CardProducto';
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
-export default function ProductosPage() {
+export default function ProductosPage({
+  carrito,
+  agregarAlCarrito,
+  incrementarCantidad,
+  decrementarCantidad,
+}) {
+  const carritoSeguro = Array.isArray(carrito) ? carrito : [];
+
   const [productos, setProductos] = useState([])
   const [estado, setEstado] = useState({ loading: false, error: null })
 
@@ -23,7 +31,15 @@ export default function ProductosPage() {
 
         const data = text ? JSON.parse(text) : []
         const lista = Array.isArray(data) ? data : data.productos || []
-        setProductos(lista)
+  
+        const formato= lista.map(p=>({
+          id: p.idProducto,
+          imagen: p.imagenUrl,
+          nombre: p.nombre,
+          descripcion: p.descripcion,
+          precio: p.precio
+        }))
+        setProductos(formato)
       } catch (err) {
         setEstado({ loading: false, error: err.message })
         return
@@ -33,11 +49,6 @@ export default function ProductosPage() {
 
     cargarProductos()
   }, [])
-
-  const formatPrecio = (valor) => {
-    if (valor == null) return ''
-    return `$${Number(valor).toLocaleString('es-CL')}`
-  }
 
   if (estado.loading) {
     return (
@@ -66,62 +77,27 @@ export default function ProductosPage() {
     )
   }
 
-  const columnas = [
-    { key: 'id', label: 'ID' },
-    { key: 'nombre', label: 'Nombre' },
-    { key: 'descripcion', label: 'Descripción' },
-    { key: 'precio', label: 'Precio', render: formatPrecio },
-    {
-      key: 'imagenUrl',
-      label: 'Imagen',
-      render: (url, prod) =>
-        url ? (
-          <img
-            src={url}
-            alt={prod.nombre}
-            style={{ width: 80, height: 80, objectFit: 'cover', borderRadius: 8 }}
-          />
-        ) : (
-          '—'
-        )
-    }
-  ]
-
   return (
-    <main style={{ padding: '1rem', marginTop: '80px' }}>
+    <main className='container mt-5'>
       <h1>Listado de Productos (API)</h1>
-      <div style={{ overflowX: 'auto', marginTop: 18 }}>
-        <table style={{ borderCollapse: 'collapse', width: '100%' }}>
-          <thead>
-            <tr>
-              {columnas.map(c => (
-                <th
-                  key={c.key}
-                  style={{ textAlign: 'left', padding: 8, borderBottom: '2px solid #ddd' }}
-                >
-                  {c.label}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {productos.map(p => (
-              <tr
-                key={p.id}
-                style={{ background: p.id % 2 ? '#fbfbfb' : 'transparent' }}
-              >
-                {columnas.map(c => (
-                  <td
-                    key={c.key}
-                    style={{ padding: 8, borderBottom: '1px solid #eee' }}
-                  >
-                    {c.render ? c.render(p[c.key], p) : p[c.key]}
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+        {productos.map(p => {
+          const itemEnCarrito = carritoSeguro.find(
+            (item) => String(item.id) === String(p.id)
+          );
+          const cantidadEnCarrito = itemEnCarrito ? itemEnCarrito.cantidad : 0;
+
+          return(
+          <CardProducto 
+            key={p.id} 
+            producto={p} 
+            onAgregar={agregarAlCarrito}
+            onIncrementar={incrementarCantidad}
+            onDecrementar={decrementarCantidad}
+            cantidadEnCarrito={cantidadEnCarrito} 
+            />
+            );
+      })}
       </div>
     </main>
   )

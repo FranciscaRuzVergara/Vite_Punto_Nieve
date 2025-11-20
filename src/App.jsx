@@ -94,7 +94,6 @@ function App() {
           }
         >
           <Route index element={<Home />} />
-
           <Route
             path="productos"
             element={
@@ -119,7 +118,15 @@ function App() {
               />
             }
           />
-
+          <Route path="prodApi" element={
+              <ProductosPage 
+                carrito={carrito}
+                agregarAlCarrito={agregarAlCarrito}
+                incrementarCantidad={incrementarCantidad}
+                decrementarCantidad={decrementarCantidad}
+              />
+            } 
+          />
           <Route path="nosotros" element={<Nosotros />} />
           <Route path="ayuda" element={<Ayuda />} />
           <Route path="login" element={<Login />} />
