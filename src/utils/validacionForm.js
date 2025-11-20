@@ -16,7 +16,7 @@ export const validateCotizacionForm = (formData) => {
   } else if (!formatoCorreo.test(correo)) {
     errors.correo = "Por favor, ingrese un correo electrónico válido.";
   } else if (!dominiosPermitidos.test(correo)) {
-    errors.correo = "Ingrese un correo válido con los dominios: @duocuc.cl, @gmail.com o @profesorduoc.cl";
+    errors.correo = "Ingrese un correo válido por ej: @duocuc.cl, @gmail.com o @profesorduoc.cl";
   }
 
   // mensaje

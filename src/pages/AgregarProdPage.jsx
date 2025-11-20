@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { validateProductoForm } from '../utils/validacionAgregarProd';
 const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
 const FormularioEnvio = () => {
@@ -12,6 +13,7 @@ const FormularioEnvio = () => {
 
   const [mensaje, setMensaje] = useState('');
   const [categorias, setCategorias] = useState([]);
+
   const obtenerCategorias = async () =>{
     try{
         const response = await fetch(`${API_BASE}/api/v1/categorias`)
@@ -37,6 +39,7 @@ const FormularioEnvio = () => {
         setMensaje('No se pudo conectar con el servidor')
     }
   };
+
   useEffect(()=>{
     obtenerCategorias();
   },[]);
@@ -56,6 +59,16 @@ const FormularioEnvio = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setMensaje('');
+
+    // llamada a la validación
+    const validationErrors = validateProductoForm(formData);
+    if (Object.keys(validationErrors).length > 0) {
+      setMensaje('Por favor corrige los errores del formulario.');
+      console.log('Errores de validación:', validationErrors);
+      return;
+    }
+
     setMensaje('Enviando datos...');
 
     const productData = {
@@ -97,7 +110,7 @@ const FormularioEnvio = () => {
     }
   };
 
-return (
+  return (
     <div className="container d-flex justify-content-center align-items-center form-container">
       <div className="card bg-dark text-white p-4 my-4 registro-card">
       <h2>Agregar Producto</h2>
