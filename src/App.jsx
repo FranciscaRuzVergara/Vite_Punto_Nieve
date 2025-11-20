@@ -17,6 +17,7 @@ import PedidosPage from "./pages/PedidosPage";
 import ClientesPage from "./pages/ClientesPage";
 import CategoriasPage from "./pages/CategoriasPage";
 import UsuariosPage from "./pages/UsuariosPage";
+import AgregarProdPage from "./pages/AgregarProdPage";
 
 function App() {
   const [carrito, setCarrito] = useState([]); 
@@ -124,6 +125,7 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="registro" element={<Registro />} />
           <Route path="mapaSitio" element={<MapaSitio />} />
+          <Route path="agregar" element={<AgregarProdPage />} />
 
           {/* rutas backend */}
           <Route path="admin/carrito" element={<CarritoPage />} />
