@@ -4,7 +4,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
-import Productos from "./components/Productos";
 import Login from "./pages/Login";
 import MapaSitio from "./pages/MapaSitio";
 import Nosotros from "./pages/Nosotros";
@@ -94,17 +93,6 @@ function App() {
           }
         >
           <Route index element={<Home />} />
-          <Route
-            path="productos"
-            element={
-              <Productos
-                carrito={carrito}
-                agregarAlCarrito={agregarAlCarrito}
-                incrementarCantidad={incrementarCantidad}
-                decrementarCantidad={decrementarCantidad}
-              />
-            }
-          />
 
           <Route
             path="carrito"
@@ -118,7 +106,7 @@ function App() {
               />
             }
           />
-          <Route path="prodApi" element={
+          <Route path="productos" element={
               <ProductosPage 
                 carrito={carrito}
                 agregarAlCarrito={agregarAlCarrito}
@@ -136,7 +124,6 @@ function App() {
 
           {/* rutas backend */}
           <Route path="admin/carrito" element={<CarritoPage />} />
-          <Route path="admin/productos" element={<ProductosPage />} />
           <Route path="admin/pedidos" element={<PedidosPage />} />
           <Route path="admin/clientes" element={<ClientesPage />} />
           <Route path="admin/categorias" element={<CategoriasPage />} />
