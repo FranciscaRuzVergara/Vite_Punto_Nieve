@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
 const FormularioEnvio = () => {
@@ -7,10 +7,39 @@ const FormularioEnvio = () => {
     descripcion: '',
     precio: 0,
     imagenUrl: '',
-    idCategoria: 1,
+    idCategoria: '',
   });
 
   const [mensaje, setMensaje] = useState('');
+  const [categorias, setCategorias] = useState([]);
+  const obtenerCategorias = async () =>{
+    try{
+        const response = await fetch(`${API_BASE}/api/v1/categorias`)
+        if(response.ok){
+            const data = await response.json();
+            const categoria = data.map(cat=>({
+                idCategoria: cat.idCategoria,
+                nombre: cat.descripcion
+            }))
+            setCategorias(categoria);
+            if(categoria.length>0){
+                setFormData(prevData => ({
+                    ...prevData,
+                    idCategoria: categoria[0].idCategoria
+                }));
+            }
+        }else{
+            console.error('Error al obtener categorias',response.statusText)
+            setMensaje('Error al cargar categorias')
+        }
+    }catch(error){
+        console.error('Error de conexion al obtener categorias:',error);
+        setMensaje('No se pudo conectar con el servidor')
+    }
+  };
+  useEffect(()=>{
+    obtenerCategorias();
+  },[]);
 
   const handleChange = (e) => {
     const { name, value, type } = e.target;
@@ -39,7 +68,6 @@ const FormularioEnvio = () => {
         idCategoria: parseInt(formData.idCategoria, 10),
       }
     };
-    console.log('JSON a enviar:', productData);
 
     try {
       const response = await fetch((`${API_BASE}/api/v1/productos`), {
@@ -57,7 +85,7 @@ const FormularioEnvio = () => {
           descripcion: '',
           precio: 0,
           imagenUrl: '',
-          idCategoria: 1, 
+          idCategoria: categorias.length>0 ? categorias[0].idCategoria: '', 
         });
       } else {
         setMensaje('Error al enviar los datos. Revisa el servidor.');
@@ -129,16 +157,23 @@ return (
         
         <div className="mb-4">
           <label htmlFor="idCategoria" className='form-label'>ID Categoría:</label>
-          <input 
-            type="number" 
-            className='form-control'
+          <select 
+            className='form-select'
             id="idCategoria" 
             name="idCategoria" 
             value={formData.idCategoria} 
             onChange={handleChange} 
-            required
-            min="1"
-          />
+            required>
+            {categorias.length === 0 && <option value="">Cargando categorías...</option>}
+            {categorias.length > 0 && categorias.map(categoria => (
+              <option 
+                key={categoria.idCategoria} 
+                value={categoria.idCategoria}
+              >
+                {categoria.nombre}
+              </option>
+            ))}
+            </select>
         </div>
         <div className="d-flex justify-content-center">
         <button type="submit" className="btn btn-success btn-md">Enviar</button>
