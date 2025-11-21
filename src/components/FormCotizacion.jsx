@@ -1,5 +1,8 @@
 import { useState } from "react"; 
 import { validateCotizacionForm } from "../utils/validacionForm";
+import "../styles/Formularios.css";
+
+
 
 export default function FormCotizacion() {
   const [formData, setFormData] = useState({ nombre: "", correo: "", mensaje: "", fecha: "" });

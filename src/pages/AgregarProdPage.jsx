@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { validateProductoForm } from '../utils/validacionAgregarProd';
+import "../styles/Formularios.css";
+
 const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
 const FormularioEnvio = () => {
@@ -61,7 +63,6 @@ const FormularioEnvio = () => {
     e.preventDefault();
     setMensaje('');
 
-    // llamada a la validación
     const validationErrors = validateProductoForm(formData);
     if (Object.keys(validationErrors).length > 0) {
       setMensaje('Por favor corrige los errores del formulario.');
@@ -111,7 +112,7 @@ const FormularioEnvio = () => {
   };
 
   return (
-    <div className="container d-flex justify-content-center align-items-center form-container">
+    <div className="container d-flex justify-content-center align-items-center form-container formulario-envio-container">
       <div className="card bg-dark text-white p-4 my-4 registro-card">
       <h2>Agregar Producto</h2>
 
@@ -194,7 +195,7 @@ const FormularioEnvio = () => {
       </form>
 
       {mensaje && (
-        <p style={{ marginTop: 12, fontWeight: 'bold', color: mensaje.includes('✅') ? 'green' : 'crimson' }}>
+        <p className={`mensaje-estado ${mensaje.includes('✅') ? 'mensaje-exito' : 'mensaje-error'}`}>
           {mensaje}
         </p>
       )}

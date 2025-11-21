@@ -1,0 +1,48 @@
+.form-container {
+  min-height: 80vh;
+}
+
+.registro-card {
+  max-width: 600px;
+  width: 100%;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+}
+
+.formulario-envio-container {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.card.bg-dark.text-white.border-0 {
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+}
+
+.mensaje-estado {
+  margin-top: 12px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.mensaje-exito {
+  color: green;
+}
+
+.mensaje-error {
+  color: crimson;
+}
+
+#formCotizacion {
+  margin-top: 1rem;
+}
+
+#formCotizacion .text-warning {
+  font-size: 0.875rem;
+  margin-top: 4px;
+}
+
+#formCotizacion .btn-success[disabled] {
+  opacity: 0.7;
+  cursor: not-allowed;
+}

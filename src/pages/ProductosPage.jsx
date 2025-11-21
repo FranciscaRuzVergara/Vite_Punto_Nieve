@@ -53,7 +53,7 @@ export default function ProductosPage({
   if (estado.loading) {
     return (
       <main style={{ padding: '1rem', marginTop: '80px' }}>
-        <h1>Listado de Productos (API)</h1>
+        <h1>Listado de Productos</h1>
         <p>Cargando productos...</p>
       </main>
     )
@@ -62,7 +62,7 @@ export default function ProductosPage({
   if (estado.error) {
     return (
       <main style={{ padding: '1rem', marginTop: '80px' }}>
-        <h1>Listado de Productos (API)</h1>
+        <h1>Listado de Productos</h1>
         <p style={{ color: 'crimson' }}>Error: {estado.error}</p>
       </main>
     )
@@ -71,7 +71,7 @@ export default function ProductosPage({
   if (!productos.length) {
     return (
       <main style={{ padding: '1rem', marginTop: '80px' }}>
-        <h1>Listado de Productos (API)</h1>
+        <h1>Listado de Productos</h1>
         <p>No hay productos para mostrar.</p>
       </main>
     )
@@ -79,7 +79,7 @@ export default function ProductosPage({
 
   return (
     <main className='container mt-5'>
-      <h1>Listado de Productos (API)</h1>
+      <h1>Listado de Productos</h1>
       <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
         {productos.map(p => {
           const itemEnCarrito = carritoSeguro.find(
